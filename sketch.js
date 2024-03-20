@@ -12,7 +12,7 @@ function setup() {
     createCanvas(640, 360);
 
     physics = new VerletPhysics2D();
-    let v = new Vec2D(0, 1);
+    let v = new Vec2D(0, 0.5);
     let gravity = new GravityBehavior(v);
     physics.addBehavior(gravity);
 
@@ -42,5 +42,6 @@ function draw() {
     circle(particleB.x, particleB.y, 16);
     circle(particleC.x, particleC.y, 16);
 
-    line(particleA.x, particleA.y, particleB.x, particleB.y, particleC.x, particleC.y);
+    line(particleA.x, particleA.y, particleB.x, particleB.y);
+    line(particleB.x, particleB.y, particleC.x, particleC.y);
 }

@@ -24,7 +24,7 @@ function setup() {
     particleB = new VerletParticle2D(320, 50);
     physics.addParticle(particleB);
 
-    spring = new VerletSpring2D(particleA, particleB, 1, 0.5);
+    spring = new VerletSpring2D(particleA, particleB, 100, 0.5);
     physics.addSpring(spring);
 }
 

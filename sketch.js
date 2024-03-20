@@ -6,6 +6,7 @@ const { Vec2D, Rect } = toxi.geom;
 
 let physics;
 let particleA;
+let spring;
 
 function setup() {
     createCanvas(640, 360);
@@ -22,6 +23,8 @@ function setup() {
     physics.addParticle(particleA);
     particleB = new VerletParticle2D(320, 50);
     physics.addParticle(particleB);
+
+    spring = new VerletSpring2D(particleA, particleB, 1, 0.5);
 }
 
 function draw() {

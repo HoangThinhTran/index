@@ -23,6 +23,8 @@ function setup() {
     physics.addParticle(particleA);
     particleB = new VerletParticle2D(320, 50);
     physics.addParticle(particleB);
+    particleC = new VerletParticle2D(200, 100);
+    physics.addParticle(particleC);
 
     spring = new VerletSpring2D(particleA, particleB, 100, 0.5);
     physics.addSpring(spring);
@@ -35,8 +37,8 @@ function draw() {
 
     fill(0);
     circle(particleA.x, particleA.y, 16);
-    fill(100);
     circle(particleB.x, particleB.y, 16);
+    circle(particleC.x, particleC.y, 16);
 
-    line(particleA.x, particleA.y, particleB.x, particleB.y);
+    line(particleA.x, particleA.y, particleB.x, particleB.y, particleC.x, particleC.y);
 }

@@ -37,4 +37,6 @@ function draw() {
     circle(particleA.x, particleA.y, 16);
     fill(50);
     circle(particleB.x, particleB.y, 16);
+
+    line(particleA.x, particleA.y, particleB.x, particleB.y);
 }

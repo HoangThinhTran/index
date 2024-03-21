@@ -20,22 +20,28 @@ function setup() {
     physics.setWorldBounds(bounds);
 
     particleA = new VerletParticle2D(320, 100);
-    physics.addParticle(particleA);
     particleB = new VerletParticle2D(320, 50);
-    physics.addParticle(particleB);
     particleC = new VerletParticle2D(200, 100);
-    physics.addParticle(particleC);
 
     spring1 = new VerletSpring2D(particleA, particleB, 100, 0.5);
     physics.addSpring(spring1);
     spring2 = new VerletSpring2D(particleB, particleC, 100, 0.5);
     physics.addSpring(spring2);
+    spring3 = new VerletSpring2D(particleC, particleA, 100, 0.5);
+    physics.addSpring(spring3);
 }
 
 function draw() {
     background(150);
 
     physics.update();
+
+    if(mouseIsPressed) {
+    particleA.lock();
+    particleA.x = mouseX;
+    particleA.y = mouseY;
+    particleA.unlock();
+    }
 
     fill(0);
     circle(particleA.x, particleA.y, 16);
@@ -44,4 +50,5 @@ function draw() {
 
     line(particleA.x, particleA.y, particleB.x, particleB.y);
     line(particleB.x, particleB.y, particleC.x, particleC.y);
+    line(particleC.x, particleC.y, particleA.x, particleA.y);
 }

@@ -5,30 +5,36 @@ const { GravityBehavior } = toxi.physics2d.behaviors;
 const { Vec2D, Rect } = toxi.geom;
 
 let physics;
-let particleA;
-let spring;
+
+let particles = [];
+let springs = [];
 
 function setup() {
     createCanvas(640, 360);
 
     physics = new VerletPhysics2D();
-    let v = new Vec2D(0, 0.5);
-    let gravity = new GravityBehavior(v);
-    physics.addBehavior(gravity);
 
     let bounds = new Rect(0, 0, width, height);
     physics.setWorldBounds(bounds);
 
-    particleA = new VerletParticle2D(320, 100);
-    particleB = new VerletParticle2D(320, 50);
-    particleC = new VerletParticle2D(200, 100);
+    particles.push(new Particle(200, 100));
+    particles.push(new Particle(400, 100));
+    particles.push(new Particle(350, 200));
+    particles.push(new Particle(400, 300));
+    particles.push(new Particle(200, 300));
+    particles.push(new Particle(250, 200));
 
-    spring1 = new VerletSpring2D(particleA, particleB, 100, 0.5);
-    physics.addSpring(spring1);
-    spring2 = new VerletSpring2D(particleB, particleC, 100, 0.5);
-    physics.addSpring(spring2);
-    spring3 = new VerletSpring2D(particleC, particleA, 100, 0.5);
-    physics.addSpring(spring3);
+    springs.push(new Spring(particles[0], particles[1], 0.1));
+    springs.push(new Spring(particles[1], particles[2], 0.1));
+    springs.push(new Spring(particles[2], particles[3], 0.1));
+    springs.push(new Spring(particles[3], particles[4], 0.1));
+    springs.push(new Spring(particles[4], particles[5], 0.1));
+    springs.push(new Spring(particles[5], particles[0], 0.1));
+    springs.push(new Spring(particles[0], particles[3], 0.1));
+    springs.push(new Spring(particles[1], particles[4], 0.1));
+    springs.push(new Spring(particles[2], particles[5], 0.1));
+
+
 }
 
 function draw() {
@@ -36,19 +42,27 @@ function draw() {
 
     physics.update();
 
+    fill(100);
+    stroke(0);
+    beginShape();
+    for(let particle of particles) {
+        vertex(particle.x, particle.y);
+    }
+    endShape(CLOSE);
+
+    // for(let particle of particles) {
+    //     particle.show();
+    // }
+
+    // for(let spring of springs) {
+    //     spring.show();
+    // }
+
     if(mouseIsPressed) {
-    particleA.lock();
-    particleA.x = mouseX;
-    particleA.y = mouseY;
-    particleA.unlock();
+    particles[0].lock();
+    particles[0].x = mouseX;
+    particles[0].y = mouseY;
+    particles[0].unlock();
     }
 
-    fill(0);
-    circle(particleA.x, particleA.y, 16);
-    circle(particleB.x, particleB.y, 16);
-    circle(particleC.x, particleC.y, 16);
-
-    line(particleA.x, particleA.y, particleB.x, particleB.y);
-    line(particleB.x, particleB.y, particleC.x, particleC.y);
-    line(particleC.x, particleC.y, particleA.x, particleA.y);
 }

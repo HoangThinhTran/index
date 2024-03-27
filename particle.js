@@ -6,6 +6,6 @@ class Particle extends VerletParticle2D {
     }
     show() {
         fill(0);
-        circle(super(x, y), this.r * 2);
+        circle(this.x, this.y, this.r * 2);
     }
 }

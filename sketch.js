@@ -10,7 +10,7 @@ let particles = [];
 let springs = [];
 
 function setup() {
-    createCanvas(640, 360);
+    createCanvas(800, 800);
 
     physics = new VerletPhysics2D();
 
@@ -19,20 +19,20 @@ function setup() {
 
     particles.push(new Particle(200, 100));
     particles.push(new Particle(400, 100));
-    particles.push(new Particle(350, 200));
     particles.push(new Particle(400, 300));
     particles.push(new Particle(200, 300));
-    particles.push(new Particle(250, 200));
+    // particles.push(new Particle(200, 300));
+    // particles.push(new Particle(250, 200));
 
-    springs.push(new Spring(particles[0], particles[1], 0.1));
-    springs.push(new Spring(particles[1], particles[2], 0.1));
-    springs.push(new Spring(particles[2], particles[3], 0.1));
-    springs.push(new Spring(particles[3], particles[4], 0.1));
-    springs.push(new Spring(particles[4], particles[5], 0.1));
-    springs.push(new Spring(particles[5], particles[0], 0.1));
-    springs.push(new Spring(particles[0], particles[3], 0.1));
-    springs.push(new Spring(particles[1], particles[4], 0.1));
-    springs.push(new Spring(particles[2], particles[5], 0.1));
+    springs.push(new Spring(particles[0], particles[1], 0.01));
+    springs.push(new Spring(particles[1], particles[2], 0.01));
+    springs.push(new Spring(particles[2], particles[3], 0.01));
+    springs.push(new Spring(particles[3], particles[0], 0.01));
+    springs.push(new Spring(particles[0], particles[2], 0.01));
+    springs.push(new Spring(particles[1], particles[3], 0.01));
+    // springs.push(new Spring(particles[0], particles[3], 0.1));
+    // springs.push(new Spring(particles[1], particles[4], 0.1));
+    // springs.push(new Spring(particles[2], particles[5], 0.1));
 
 
 }
@@ -42,11 +42,10 @@ function draw() {
 
     physics.update();
 
-    fill(100);
-    stroke(0);
     beginShape();
     for(let particle of particles) {
         vertex(particle.x, particle.y);
+        particle.show();
     }
     endShape(CLOSE);
 

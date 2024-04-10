@@ -45,7 +45,9 @@ function draw() {
     beginShape();
     for(let particle of particles) {
         vertex(particle.x, particle.y);
+        let num = (particles.indexOf(particle));
         particle.show();
+        particle.count(num);
     }
     endShape(CLOSE);
 
